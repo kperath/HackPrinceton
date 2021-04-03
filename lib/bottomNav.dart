@@ -1,7 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
+import 'package:hackprinceton/screens/add.dart';
 import 'package:hackprinceton/screens/home.dart';
+import 'package:hackprinceton/screens/profile.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -11,8 +13,8 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Home(),
-    Home(),
+    AddProject(),
+    Profile(),
   ];
   int _currentIndex = 0;
 

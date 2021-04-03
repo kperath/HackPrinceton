@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -12,224 +13,281 @@ class ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-          key: scaffoldKey,
-          // appBar: AppBar(
-          //   elevation: 0,
-          //   //brightness: Brightness.light,
-          //   backgroundColor: Color(0xff263284),
-          //   title: Text(
-          //     'Profile',
-          //   ),
-          //   leading: IconButton(
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //     icon: Icon(
-          //       Icons.arrow_back_ios,
-          //       size: 20,
-          //       color: Colors.black,
-          //     ),
-          //   ),
-          // ),
-          backgroundColor: Colors.white,
-          body: Container(
-              padding: const EdgeInsets.all(20.0),
-              color: Colors.white,
-              child: new SingleChildScrollView(
-                child: new ConstrainedBox(
-                  constraints: new BoxConstraints(),
-                  child: new Container(
-                    child: new Center(
-                      child: new Column(
-                        children: [
-                          new CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://e7.pngegg.com/pngimages/643/98/png-clipart-computer-icons-avatar-mover-business-flat-design-corporate-elderly-care-microphone-heroes-thumbnail.png'),
-                            radius: 70,
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Full Name *",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            validator: (val) {
-                              if (val.length == 0) {
-                                return "Name can not be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            keyboardType: TextInputType.text,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Contact Number*",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            validator: (val) {
-                              if (val.length == 0) {
-                                return "Contact number cannot be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            keyboardType: TextInputType.number,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          DropDownButtonGender(),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          // Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                          //     children: [DropDownButtonStack()]),
-                          // new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Github*",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            validator: (val) {
-                              if (val.length == 0) {
-                                return "This field can not be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            keyboardType: TextInputType.url,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Devpost",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            validator: (val) {
-                              if (val.length == 0) {
-                                return "This field can not be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            keyboardType: TextInputType.url,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Portfolio",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            validator: (val) {
-                              if (val.length == 0) {
-                                return "This field can not be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            keyboardType: TextInputType.url,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Skills*",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            validator: (val) {
-                              if (val.length == 0) {
-                                return "Skills cannot be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 3,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          new TextFormField(
-                            decoration: new InputDecoration(
-                              labelText: "Short Intro*",
-                              fillColor: Colors.white,
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
-                              ),
-                            ),
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 3,
-                            style: new TextStyle(
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          new Padding(padding: EdgeInsets.only(top: 20.0)),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 50,
-                            child: RaisedButton(
-                                elevation: 5,
-                                color: Color(0xff263284),
-                                child: Text(
-                                  'Save',
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
+    CollectionReference users = FirebaseFirestore.instance.collection("users");
+    /*
+        stream: projects.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            print('Error: ${snapshot.error.toString()}');
+            return Text('Uh oh. Failed to load projects.');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          */
+    return StreamBuilder<QuerySnapshot>(
+        stream: users.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            print('Error: ${snapshot.error.toString()}');
+            return Text('Uh oh. Failed to load projects.');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          final nameController = TextEditingController();
+          final interestsController = TextEditingController();
+          final skillsController = TextEditingController();
+
+          nameController.text = snapshot.data.docs[0].data()["name"];
+          interestsController.text = snapshot.data.docs[0].data()["interests"].toString();
+          skillsController.text = snapshot.data.docs[0].data()["skills"].toString();
+
+          return SafeArea(
+            child: Scaffold(
+                key: scaffoldKey,
+                // appBar: AppBar(
+                //   elevation: 0,
+                //   //brightness: Brightness.light,
+                //   backgroundColor: Color(0xff263284),
+                //   title: Text(
+                //     'Profile',
+                //   ),
+                //   leading: IconButton(
+                //     onPressed: () {
+                //       Navigator.pop(context);
+                //     },
+                //     icon: Icon(
+                //       Icons.arrow_back_ios,
+                //       size: 20,
+                //       color: Colors.black,
+                //     ),
+                //   ),
+                // ),
+                backgroundColor: Colors.white,
+                body: Container(
+                    padding: const EdgeInsets.all(20.0),
+                    color: Colors.white,
+                    child: new SingleChildScrollView(
+                      child: new ConstrainedBox(
+                        constraints: new BoxConstraints(),
+                        child: new Container(
+                          child: new Center(
+                            child: new Column(
+                              children: [
+                                new CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      'https://e7.pngegg.com/pngimages/643/98/png-clipart-computer-icons-avatar-mover-business-flat-design-corporate-elderly-care-microphone-heroes-thumbnail.png'),
+                                  radius: 70,
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  controller: nameController,
+                                  decoration: new InputDecoration(
+                                    labelText: "Username *",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
                                     ),
                                   ),
+                                  validator: (val) {
+                                    if (val.length == 0) {
+                                      return "Name can not be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
                                 ),
-                                onPressed: () {}),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  decoration: new InputDecoration(
+                                    labelText: "Contact Number",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
+                                    ),
+                                  ),
+                                  validator: (val) {
+                                    if (val.length == 0) {
+                                      return "Contact number cannot be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                DropDownButtonGender(),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                // Column(
+                                //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                                //     children: [DropDownButtonStack()]),
+                                // new Padding(padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  decoration: new InputDecoration(
+                                    labelText: "Github",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
+                                    ),
+                                  ),
+                                  validator: (val) {
+                                    if (val.length == 0) {
+                                      return "This field can not be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.url,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  decoration: new InputDecoration(
+                                    labelText: "Devpost",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
+                                    ),
+                                  ),
+                                  validator: (val) {
+                                    if (val.length == 0) {
+                                      return "This field can not be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.url,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  decoration: new InputDecoration(
+                                    labelText: "Portfolio",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
+                                    ),
+                                  ),
+                                  validator: (val) {
+                                    if (val.length == 0) {
+                                      return "This field can not be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.url,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  controller: skillsController,
+                                  decoration: new InputDecoration(
+                                    labelText: "Skills*",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
+                                    ),
+                                  ),
+                                  validator: (val) {
+                                    if (val.length == 0) {
+                                      return "Skills cannot be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: 3,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                new TextFormField(
+                                  controller: interestsController,
+                                  decoration: new InputDecoration(
+                                    labelText: "Interests*",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(),
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: 3,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                new Padding(
+                                    padding: EdgeInsets.only(top: 20.0)),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  height: 50,
+                                  child: RaisedButton(
+                                      elevation: 5,
+                                      color: Color(0xff263284),
+                                      child: Text(
+                                        'Save',
+                                        style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () {}),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ))),
-    );
+                    ))),
+          );
+        });
   }
 }
 

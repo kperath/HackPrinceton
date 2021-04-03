@@ -29,9 +29,17 @@ class _HomeState extends State<Home> {
             body: Container(
               child: ListView(
                 children: snapshot.data.docs.map((DocumentSnapshot document) {
-                  return ListTile(
-                    title: Text(document.data()["title"])
-                  );
+                  return Card(
+                    child: InkWell(
+                      splashColor: Colors.blue.withAlpha(30),
+                      onTap: () {
+                        print("card tapped!");
+                      },
+                      child: ListTile(
+                        title: Text(document.data()["title"]),
+                        subtitle: Text(document.data()["about"]),
+                      ),
+                  ));
                 }).toList(),
               ),
             ),

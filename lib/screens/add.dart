@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddProject extends StatefulWidget {
   @override
@@ -9,6 +10,26 @@ class AddProject extends StatefulWidget {
 class _AddProjectState extends State<AddProject> {
   @override
   Widget build(BuildContext context) {
+    CollectionReference projects =
+        FirebaseFirestore.instance.collection("projects");
+
+    final titleController = TextEditingController();
+    final aboutController = TextEditingController();
+    final requiresController = TextEditingController();
+
+    Future<void> addProject() {
+      // Call the user's CollectionReference to add a new user
+      return projects
+          .add({
+            'title': titleController.text,
+            'about': aboutController.text,
+            'members': ["@chris", "@jon"],
+            'requires': requiresController.text.split(",")
+          })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+    }
+
     return SafeArea(
       child: Scaffold(
           body: new SingleChildScrollView(
@@ -35,6 +56,7 @@ class _AddProjectState extends State<AddProject> {
                       ),
                       new Padding(padding: EdgeInsets.only(top: 20.0)),
                       new TextFormField(
+                        controller: titleController,
                         decoration: new InputDecoration(
                           labelText: "Project Name *",
                           fillColor: Colors.white,
@@ -57,6 +79,7 @@ class _AddProjectState extends State<AddProject> {
                       ),
                       new Padding(padding: EdgeInsets.only(top: 20.0)),
                       new TextFormField(
+                        controller: requiresController,
                         decoration: new InputDecoration(
                           labelText: "Tech Stack*",
                           fillColor: Colors.white,
@@ -101,6 +124,7 @@ class _AddProjectState extends State<AddProject> {
                       ),
                       new Padding(padding: EdgeInsets.only(top: 20.0)),
                       new TextFormField(
+                        controller: aboutController,
                         decoration: new InputDecoration(
                           labelText: "Description*",
                           fillColor: Colors.white,
@@ -163,7 +187,9 @@ class _AddProjectState extends State<AddProject> {
                                 ),
                               ),
                             ),
-                            onPressed: () {}),
+                            onPressed: () {
+                              addProject();
+                            }),
                       ),
                     ],
                   ),

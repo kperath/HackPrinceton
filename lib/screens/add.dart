@@ -17,9 +17,9 @@ class _AddProjectState extends State<AddProject> {
     final aboutController = TextEditingController();
     final requiresController = TextEditingController();
 
-    Future<void> addProject() {
+    void addProject() {
       // Call the user's CollectionReference to add a new user
-      return projects
+      projects
           .add({
             'title': titleController.text,
             'about': aboutController.text,
@@ -28,6 +28,10 @@ class _AddProjectState extends State<AddProject> {
           })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
+
+      titleController.clear();
+      aboutController.clear();
+      requiresController.clear();
     }
 
     return SafeArea(

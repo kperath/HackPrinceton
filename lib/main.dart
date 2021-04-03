@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackprinceton/screens/splash.dart';
+import 'package:hackprinceton/screens/onboarding.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Splash(),
+      home: OnboardingScreen(),
     );
   }
 }

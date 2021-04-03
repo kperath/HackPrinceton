@@ -1,0 +1,5 @@
+{
+    "title": "projectname",
+    "requires": ["apache", "nginx"],
+    "members": ["yourname"]
+}

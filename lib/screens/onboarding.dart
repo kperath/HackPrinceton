@@ -98,12 +98,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 30.0),
                             Text(
-                              'Connect people\naround the world',
+                              'Connect with people\naround the world',
                               style: kTitleStyle,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'Lorem ',
+                              '',
                               style: kSubtitleStyle,
                             ),
                           ],
@@ -125,12 +125,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 30.0),
                             Text(
-                              'Live your life smarter\nwith us!',
+                              'Find projects that match\nyour skills',
                               style: kTitleStyle,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'Lorem',
+                              '',
                               style: kSubtitleStyle,
                             ),
                           ],
@@ -152,12 +152,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 30.0),
                             Text(
-                              'Get a new experience\nof imagination',
+                              'Accomplish goals \ntogether',
                               style: kTitleStyle,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'Lorem ',
+                              '',
                               style: kSubtitleStyle,
                             ),
                           ],

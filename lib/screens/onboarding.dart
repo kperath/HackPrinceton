@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hackprinceton/bottomNav.dart';
+import 'package:hackprinceton/screens/first_screen.dart';
 import 'package:hackprinceton/utils/style.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -217,7 +218,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: GestureDetector(
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BottomNav()),
+                  MaterialPageRoute(builder: (context) => FirstScreen()),
                 ),
                 child: Center(
                   child: Padding(
